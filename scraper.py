@@ -6,7 +6,7 @@ base_url = "https://books.toscrape.com/catalogue/page-{}.html"
 
 data = []
 
-# 5 pages = 100 books (20 books per page)
+# Scrape first 5 pages (100 books)
 for page in range(1, 6):
 
     url = base_url.format(page)
@@ -27,9 +27,14 @@ for page in range(1, 6):
 
         data.append([title, price, rating])
 
+
+# Create DataFrame
 df = pd.DataFrame(data, columns=["Title", "Price", "Rating"])
 
-df.to_csv("books.csv", index=False)
+
+# Save CSV with proper encoding
+df.to_csv("books.csv", index=False, encoding="utf-8-sig")
+
 
 print("Success!")
 print(f"Total Books Scraped: {len(df)}")
